@@ -37,7 +37,7 @@
   width: 100vw;
 }
 .pokeball {
-  width: 42vw;
+  width: 45vw;
   height: auto;
   position: absolute;
   z-index: 2;
@@ -112,7 +112,7 @@
 .spacer-top,
 .spacer-bottom {
   flex: 1; /* Ocupa el espacio disponible entre los elementos */
-  background-color: rgb(196, 12, 36); /* Color del espacio */
+  background-color: rgb(190, 16, 35); /* Color del espacio */
   height: 100%; /* Ajusta la altura según sea necesario */
 }
 .bottom {
