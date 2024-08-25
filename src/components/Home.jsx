@@ -13,8 +13,10 @@ export function Home() {
   const handleImageClick = () => {
     if (!isClicked) {
       setIsClicked(true);
-      setShowCards(true); // Muestra cards-container cuando se hace clic en la imagen
-      setTimeout(() => setIsExpanded(!isExpanded), 650);
+      setIsExpanded(true);
+      setTimeout(() => {
+        setShowCards(true); // Muestra cards-container después de la animación de expansión
+      }, 50); // Debe coincidir con la duración de la animación CSS
     }
   };
 
