@@ -5,6 +5,7 @@ export function Home() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+  const [showCards, setShowCards] = useState(false); // Nuevo estado para controlar la visibilidad de cards-container
   const [pokemons, setPokemons] = useState([]);
   const [selectedPokemon, setSelectedPokemon] = useState(null); // Estado para el Pokémon seleccionado
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para el modal
@@ -12,6 +13,7 @@ export function Home() {
   const handleImageClick = () => {
     if (!isClicked) {
       setIsClicked(true);
+      setShowCards(true); // Muestra cards-container cuando se hace clic en la imagen
       setTimeout(() => setIsExpanded(!isExpanded), 650);
     }
   };
@@ -82,18 +84,20 @@ export function Home() {
           className={`middle ${isExpanded ? "expanded" : ""}`}
           onClick={handleImageClick}
         >
-          <div className="cards-container">
-            {pokemons.map((pokemon) => (
-              <div
-                className="card"
-                key={pokemon.id}
-                onClick={() => openModal(pokemon)} // Abre el modal al hacer clic
-              >
-                <img src={pokemon.icon} alt={pokemon.name} />
-                <p>{pokemon.id}</p>
-              </div>
-            ))}
-          </div>
+          {showCards && ( // Condicionalmente muestra cards-container basado en showCards
+            <div className="cards-container">
+              {pokemons.map((pokemon) => (
+                <div
+                  className="card"
+                  key={pokemon.id}
+                  onClick={() => openModal(pokemon)} // Abre el modal al hacer clic
+                >
+                  <img src={pokemon.icon} alt={pokemon.name} />
+                  <p>{pokemon.id}</p>
+                </div>
+              ))}
+            </div>
+          )}
           <img
             src="./pokeball.png"
             alt="pokeball"
