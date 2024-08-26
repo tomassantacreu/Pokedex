@@ -30,7 +30,9 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  position: relative;
+  justify-content: flex-start;
+  z-index: 3;
 }
 
 .top,
@@ -41,7 +43,7 @@
   width: 45vw;
   height: auto;
   position: absolute;
-  z-index: 2;
+  z-index: 4;
   cursor: pointer;
   transition: transform 1.1s ease, opacity 1.4s ease;
   animation: spin 10s linear infinite;
@@ -63,14 +65,14 @@
   height: 20vh;
 }
 .middle.expanded {
-  height: 200vh; /* altura cuando se expande */
+  height: 230vh; /* altura cuando se expande */
 }
 .cards-container {
   display: flex;
   flex-direction: row;
   gap: 10px;
   position: relative;
-  z-index: 5;
+  z-index: 1;
   width: 100vw;
   height: auto;
   justify-content: center;
@@ -97,18 +99,13 @@
   width: 80%;
 }
 
-.circles {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: absolute;
-  z-index: 2;
-}
 .top2,
 .bottom2 {
   width: 100vw;
+  height: auto;
+  display: flex;
+  position: absolute;
+  z-index: 4;
 }
 
 .spacer-top,
@@ -120,9 +117,11 @@
 .bottom {
   width: 100vw;
   height: 100vh;
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
+  z-index: 3;
 }
 .bottom img {
   width: 100vw;

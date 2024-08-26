@@ -16,7 +16,7 @@ export function Home() {
       setIsExpanded(true);
       setTimeout(() => {
         setShowCards(true); // Muestra cards-container después de la animación de expansión
-      }, 50); // Debe coincidir con la duración de la animación CSS
+      }, 5); // Debe coincidir con la duración de la animación CSS
     }
   };
 
@@ -73,12 +73,10 @@ export function Home() {
 
   return (
     <div className="apli">
-      <div className="circles">
-        <img src="./top-2.png" alt="top2" className="top2" />
-        <img src="./bottom-2.png" alt="bottom2" className="bottom2" />
-      </div>
+      <div className="circles"></div>
       <div className="home">
         <div className="top">
+          <img src="./top-2.png" alt="top2" className="top2" />
           <div className="spacer-top"></div>
           <img src="./top.png" alt="top" className="topimg" />
         </div>
@@ -116,6 +114,7 @@ export function Home() {
         <div className="bottom">
           <img src="./bottom.png" alt="bottom" />
           <div className="spacer-bottom"></div>
+          <img src="./bottom-2.png" alt="bottom2" className="bottom2" />
         </div>
       </div>
     </div>

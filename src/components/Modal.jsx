@@ -37,13 +37,28 @@ const Modal = ({ isOpen, onClose, pokemon }) => {
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <span className="close-button" onClick={onClose}>
-          &times;
-        </span>
-        <h2>{pokemon.name}</h2>
-        <img src={pokemon.gif} alt={pokemon.name} />
-        <p>ID: {pokemon.id}</p>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-bg"></div>
+        <div className="modal-content">
+          <span className="close-button" onClick={onClose}>
+            &times;
+          </span>
+          <div className="modal-img">
+            <img src={pokemon.gif} alt={pokemon.name} />
+          </div>
+          <div className="modal-info">
+            {" "}
+            <h2>{pokemon.name}</h2>
+            <p>ID: {pokemon.id}</p>
+          </div>
+        </div>
+
+        <div className="modal-description">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum in
+            dolore voluptas repudiandae obcaecati consequuntur maxime voluptatum
+          </p>
+        </div>
       </div>
     </div>
   );
