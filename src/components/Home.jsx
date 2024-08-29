@@ -10,6 +10,42 @@ export function Home() {
   const [selectedPokemon, setSelectedPokemon] = useState(null); // Estado para el Pokémon seleccionado
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado para el modal
 
+  // Listado de sprites de tipos de Pokémon
+  const [typeSprites, setTypeSprites] = useState({
+    fire: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/10.png",
+    water:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/11.png",
+    grass:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/12.png",
+    electric:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/13.png",
+    ice: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/15.png",
+    fighting:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/2.png",
+    poison:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/4.png",
+    ground:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/5.png",
+    flying:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/3.png",
+    psychic:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/14.png",
+    bug: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/7.png",
+    rock: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/6.png",
+    ghost:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/8.png",
+    dragon:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/16.png",
+    dark: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/17.png",
+    steel:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/9.png",
+    fairy:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/18.png",
+    normal:
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/1.png",
+    // Agrega más tipos aquí si es necesario
+  });
+
   const handleImageClick = () => {
     if (!isClicked) {
       setIsClicked(true);
@@ -40,6 +76,35 @@ export function Home() {
           pokemons.map(async (pokemon) => {
             const res = await fetch(pokemon.url);
             const pokemonData = await res.json();
+
+            // Obtener la información de la especie
+            const speciesRes = await fetch(pokemonData.species.url);
+            const speciesData = await speciesRes.json();
+
+            // Obtener el flavor_text en español
+            const flavorTextEntry = speciesData.flavor_text_entries.find(
+              (entry) => entry.language.name === "es"
+            );
+            const flavorText = flavorTextEntry
+              ? flavorTextEntry.flavor_text
+              : "No hay texto disponible en español";
+
+            // Obtener el genus en español
+            const genusEntry = speciesData.genera.find(
+              (entry) => entry.language.name === "es"
+            );
+            const genus = genusEntry
+              ? genusEntry.genus
+              : "No hay género disponible en español";
+
+            // Obtener los tipos y sus sprites
+            const types = pokemonData.types.map((typeInfo) => ({
+              name: typeInfo.type.name,
+              sprite:
+                typeSprites[typeInfo.type.name] ||
+                "https://example.com/default.png", // Usa el sprite del estado
+            }));
+
             return {
               id: pokemonData.id,
               name: pokemonData.name,
@@ -48,6 +113,9 @@ export function Home() {
               icon:
                 pokemonData.sprites.versions["generation-vii"].icons
                   .front_default || pokemonData.sprites.front_default,
+              flavorText: flavorText,
+              genus: genus,
+              types: types, // Añade los tipos y sprites aquí
             };
           })
         );
@@ -59,7 +127,7 @@ export function Home() {
     };
 
     fetchPokemons();
-  }, []);
+  }, [typeSprites]);
 
   const openModal = (pokemon) => {
     setSelectedPokemon(pokemon);
@@ -69,6 +137,11 @@ export function Home() {
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedPokemon(null);
+  };
+
+  // Function to format Pokémon ID with leading zeros
+  const formatPokemonId = (id) => {
+    return id.toString().padStart(3, "0"); // Asegúrate de que el ID tenga 3 dígitos
   };
 
   return (
@@ -93,7 +166,8 @@ export function Home() {
                   onClick={() => openModal(pokemon)} // Abre el modal al hacer clic
                 >
                   <img src={pokemon.icon} alt={pokemon.name} />
-                  <p>{pokemon.id}</p>
+                  <p>{formatPokemonId(pokemon.id)}</p>{" "}
+                  {/* Formatea el ID aquí */}
                 </div>
               ))}
             </div>

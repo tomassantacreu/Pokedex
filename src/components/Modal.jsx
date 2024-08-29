@@ -35,29 +35,55 @@ const Modal = ({ isOpen, onClose, pokemon }) => {
 
   if (!isOpen) return null;
 
+  // Function to capitalize the first letter of the Pokémon name
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  };
+
+  // Function to format Pokémon ID with leading zeros
+  const formatPokemonId = (id) => {
+    return id.toString().padStart(3, "0"); // Asegúrate de que el ID tenga 3 dígitos
+  };
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-bg"></div>
         <div className="modal-content">
-          <span className="close-button" onClick={onClose}>
+          <span className="close-button dark" onClick={onClose}>
             &times;
           </span>
           <div className="modal-img">
             <img src={pokemon.gif} alt={pokemon.name} />
           </div>
           <div className="modal-info">
-            {" "}
-            <h2>{pokemon.name}</h2>
-            <p>ID: {pokemon.id}</p>
+            <div className="modal-info-div modal-title">
+              <p>N.° {formatPokemonId(pokemon.id)}</p>{" "}
+              {/* Formatea el ID aquí */}
+              <p>{capitalizeFirstLetter(pokemon.name)}</p>{" "}
+              {/* Capitaliza el nombre aquí */}
+            </div>
+            <div className="modal-info-div dark">
+              <p>{pokemon.genus}</p>
+            </div>
+            <div className="modal-info-div dark">
+              <p>Tipo</p>
+              <div className="">
+                {pokemon.types.map((type) => (
+                  <img
+                    key={type.name}
+                    src={type.sprite} // Muestra el sprite del tipo
+                    alt={type.name}
+                    className="type-sprite"
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
         <div className="modal-description">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum in
-            dolore voluptas repudiandae obcaecati consequuntur maxime voluptatum
-          </p>
+          <p>{pokemon.flavorText}</p> {/* Muestra el flavorText aquí */}
         </div>
       </div>
     </div>

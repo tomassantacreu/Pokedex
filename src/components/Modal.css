@@ -21,17 +21,17 @@
   flex-direction: column;
   justify-content: space-between;
   border-radius: 10px;
+  overflow: hidden;
 }
 .modal-bg {
   background: url("../../public/bg.png");
-  animation: moveBackground 20s linear infinite;
+  animation: moveBackground 50s linear infinite;
   position: absolute;
-  background-size: 50%;
+  background-size: 30%;
   z-index: 5;
-  width: 200%;
+  width: 300%;
   height: 100%;
   border-radius: 10px;
-  overflow: hidden;
 }
 .modal-content {
   display: flex;
@@ -40,37 +40,73 @@
   height: 100%;
   color: white;
   border-radius: 10px;
+  background: linear-gradient(
+    rgba(1, 112, 177, 0.616),
+    rgba(7, 224, 253, 0.377)
+  );
 }
 .modal-img {
   width: 50%;
   height: 100%;
+  padding-left: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.modal-img img {
+  max-width: 133px;
+  max-height: 129px;
+}
+.modal-info {
+  width: 65%;
+  margin: 20px;
+  align-content: center;
+}
+
+.modal-info-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: larger;
+
+  margin: 3px;
+}
+.modal-title {
+  font-size: x-large;
+}
 
 .modal-description {
-  background-color: white;
+  background: linear-gradient(white, rgb(151, 151, 151));
+  color: black;
   height: 10vh;
   width: 100%;
   position: relative;
   z-index: 10;
   border-radius: 10px;
+  padding: 10px;
+  height: 50%;
+  font-size: larger;
+}
+.modal-description p {
+  padding: 5px;
 }
 
 .close-button {
   position: absolute;
-  top: 10px;
   right: 10px;
   font-size: 24px;
   cursor: pointer;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.dark {
+  color: black;
 }
 
 @keyframes moveBackground {
   from {
-    background-position: 0 0; /* Empieza en la posición inicial */
+    background-position: 0; /* Empieza en la posición inicial */
   }
   to {
-    background-position: 100% 100%; /* Mueve el fondo completamente a la derecha y abajo */
+    background-position: 100%; /* Mueve el fondo completamente a la derecha y abajo */
   }
 }
