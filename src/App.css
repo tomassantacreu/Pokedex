@@ -67,6 +67,7 @@
 }
 .middle.expanded {
   height: 230vh; /* altura cuando se expande */
+  padding: 2px;
 }
 .cards-container {
   display: flex;
@@ -80,6 +81,7 @@
   flex-wrap: wrap; /* Permite que las cards se ajusten en varias filas */
   overflow-y: scroll; /* Habilita el desplazamiento vertical si es necesario */ /* Espaciado interno */
   justify-items: space-around;
+  padding: 1px;
 }
 
 .card {
@@ -95,8 +97,8 @@
   );
   border-radius: 5px;
   padding: 6px;
-  width: 16%;
-  height: 17%;
+  width: 70px;
+  height: 70px;
   color: white;
   padding: 2px;
   font-size: 180%;

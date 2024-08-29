@@ -30,14 +30,14 @@
   background-size: 30%;
   z-index: 5;
   width: 300%;
-  height: 100%;
+  height: 80%;
   border-radius: 10px;
 }
 .modal-content {
   display: flex;
   position: relative;
   z-index: 6;
-  height: 100%;
+  height: 200%;
   color: white;
   border-radius: 10px;
   background: linear-gradient(
@@ -68,7 +68,6 @@
   flex-direction: row;
   justify-content: space-between;
   font-size: larger;
-
   margin: 3px;
 }
 .modal-title {
@@ -84,7 +83,7 @@
   z-index: 10;
   border-radius: 10px;
   padding: 10px;
-  height: 50%;
+  height: 70%;
   font-size: larger;
 }
 .modal-description p {
