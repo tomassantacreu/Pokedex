@@ -16,6 +16,7 @@
   color: white;
   padding: 2px;
   font-size: 180%;
+  position: relative;
 }
 .card img {
   width: 80%;
