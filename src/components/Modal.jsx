@@ -1,22 +1,27 @@
-import React, { useState, useEffect } from "react";
-import "./Modal.css"; // Asegúrate de agregar estilos para el modal
+import React, { useState, useEffect, useRef } from "react";
+import "./Modal.css";
 
-const Modal = ({ isOpen, onClose, pokemon }) => {
+// Función para capitalizar la primera letra de una cadena
+const capitalizeFirstLetter = (string) =>
+  string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+
+// Función para formatear el ID del Pokémon con ceros a la izquierda
+const formatPokemonId = (id) => id.toString().padStart(3, "0");
+
+export function Modal({ isOpen, onClose, pokemon }) {
+  const audioRef = useRef(null);
+
   useEffect(() => {
     if (isOpen && pokemon) {
       const fetchCryUrl = async () => {
         try {
-          const response = await fetch(
-            `https://pokeapi.co/api/v2/pokemon-species/${pokemon.id}`
-          );
-          const data = await response.json();
-          // Asumimos que la URL del grito se puede encontrar en un campo adecuado
-          // En este ejemplo, cambiamos a una URL directa para el sonido
-          const cryUrl = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/${pokemon.id}.ogg`; // Cambia esto si tienes una URL diferente
-          const audio = new Audio(cryUrl);
-          audio.play().catch((error) => {
-            console.error("Error playing audio:", error);
-          });
+          const cryUrl = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/${pokemon.id}.ogg`;
+          if (audioRef.current) {
+            audioRef.current.src = cryUrl;
+            audioRef.current.play().catch((error) => {
+              console.error("Error playing audio:", error);
+            });
+          }
         } catch (error) {
           console.error("Error fetching cry URL:", error);
         }
@@ -24,26 +29,17 @@ const Modal = ({ isOpen, onClose, pokemon }) => {
 
       fetchCryUrl();
 
-      // Clean up function to stop the audio if the modal is closed
+      // Clean up function to stop the audio if the modal is closed or if the component unmounts
       return () => {
-        const audio = new Audio();
-        audio.pause();
-        audio.currentTime = 0;
+        if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current.currentTime = 0;
+        }
       };
     }
   }, [isOpen, pokemon]);
 
   if (!isOpen) return null;
-
-  // Function to capitalize the first letter of the Pokémon name
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-  };
-
-  // Function to format Pokémon ID with leading zeros
-  const formatPokemonId = (id) => {
-    return id.toString().padStart(3, "0"); // Asegúrate de que el ID tenga 3 dígitos
-  };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -58,10 +54,8 @@ const Modal = ({ isOpen, onClose, pokemon }) => {
           </div>
           <div className="modal-info">
             <div className="modal-info-div modal-title">
-              <p>N.° {formatPokemonId(pokemon.id)}</p>{" "}
-              {/* Formatea el ID aquí */}
-              <p>{capitalizeFirstLetter(pokemon.name)}</p>{" "}
-              {/* Capitaliza el nombre aquí */}
+              <p>N.° {formatPokemonId(pokemon.id)}</p>
+              <p>{capitalizeFirstLetter(pokemon.name)}</p>
             </div>
             <div className="modal-info-div dark">
               <p>{pokemon.genus}</p>
@@ -72,7 +66,7 @@ const Modal = ({ isOpen, onClose, pokemon }) => {
                 {pokemon.types.map((type) => (
                   <img
                     key={type.name}
-                    src={type.sprite} // Muestra el sprite del tipo
+                    src={type.sprite}
                     alt={type.name}
                     className="type-sprite"
                   />
@@ -81,13 +75,12 @@ const Modal = ({ isOpen, onClose, pokemon }) => {
             </div>
           </div>
         </div>
-
         <div className="modal-description">
-          <p>{pokemon.flavorText}</p> {/* Muestra el flavorText aquí */}
+          <p>{pokemon.flavorText}</p>
         </div>
+        {/* Audio element for playing Pokémon cry */}
+        <audio ref={audioRef} />
       </div>
     </div>
   );
-};
-
-export default Modal;
+}
