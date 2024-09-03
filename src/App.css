@@ -17,6 +17,7 @@
     rgb(239, 253, 253),
     rgb(13, 219, 255)
   );
+  overflow: hidden;
 }
 
 .top {
