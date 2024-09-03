@@ -46,9 +46,7 @@ const formatPokemonId = (id) => id.toString().padStart(3, "0");
 
 const fetchPokemonsData = async () => {
   try {
-    const response = await fetch(
-      "https://pokeapi.co/api/v2/pokemon?limit=1172"
-    );
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=807");
     const { results: pokemons } = await response.json();
 
     const detailedPokemons = await Promise.all(
