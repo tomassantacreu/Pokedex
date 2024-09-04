@@ -46,9 +46,12 @@ export function Modal({ isOpen, onClose, pokemon }) {
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-bg"></div>
         <div className="modal-content">
-          <span className="close-button dark" onClick={onClose}>
-            &times;
-          </span>
+          <img
+            src="/close.png"
+            alt=""
+            className="close-button"
+            onClick={onClose}
+          />
           <div className="modal-img">
             <img src={pokemon.gif} alt={pokemon.name} />
           </div>

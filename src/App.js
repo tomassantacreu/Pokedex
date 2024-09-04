@@ -2,6 +2,7 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Modal } from "./components/Modal";
 import { Pokeball } from "./components/Pokeball";
+
 import "./App.css"; // Asegúrate de tener tus estilos aquí
 import "./fonts.css";
 const PokemonCard = lazy(() =>
