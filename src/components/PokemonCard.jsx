@@ -1,7 +1,7 @@
 import React from "react";
 import "./PokemonCard.css";
 
-export function PokemonCard({ pokemon, onClick }) {
+export const PokemonCard = ({ pokemon, onClick }) => {
   return (
     <div className="card" onClick={() => onClick(pokemon)}>
       <img src={pokemon.icon} alt={pokemon.name} />
@@ -9,4 +9,4 @@ export function PokemonCard({ pokemon, onClick }) {
       {/* Formatea el ID aquí */}
     </div>
   );
-}
+};

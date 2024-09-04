@@ -1,10 +1,14 @@
 // src/App.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Modal } from "./components/Modal";
 import { Pokeball } from "./components/Pokeball";
-import { PokemonCard } from "./components/PokemonCard";
 import "./App.css"; // Asegúrate de tener tus estilos aquí
 import "./fonts.css";
+const PokemonCard = lazy(() =>
+  import("./components/PokemonCard").then((module) => ({
+    default: module.PokemonCard,
+  }))
+);
 
 // Constantes para los sprites de tipos de Pokémon
 const TYPE_SPRITES = {
@@ -118,7 +122,7 @@ function App() {
     if (!isClicked) {
       setIsClicked(true);
       setIsExpanded(true);
-      setTimeout(() => setShowCards(true), 5);
+      setTimeout(() => setShowCards(true), 0);
     }
   };
 
@@ -145,13 +149,15 @@ function App() {
       >
         {showCards && (
           <div className="cards-container">
-            {pokemons.map((pokemon) => (
-              <PokemonCard
-                key={pokemon.id}
-                pokemon={pokemon}
-                onClick={() => openModal(pokemon)}
-              />
-            ))}
+            <Suspense fallback={<div>Loading...</div>}>
+              {pokemons.map((pokemon) => (
+                <PokemonCard
+                  key={pokemon.id}
+                  pokemon={pokemon}
+                  onClick={() => openModal(pokemon)}
+                />
+              ))}
+            </Suspense>
           </div>
         )}
         <Pokeball isClicked={isClicked} isHidden={isHidden} />
