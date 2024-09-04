@@ -100,7 +100,6 @@ function App() {
   const [isClicked, setIsClicked] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [showCards, setShowCards] = useState(false);
-  const [shouldShowCards, setShouldShowCards] = useState(false);
   const [pokemons, setPokemons] = useState([]);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -121,7 +120,7 @@ function App() {
 
   useEffect(() => {
     if (isExpanded) {
-      setShouldShowCards(true);
+      setShowCards(true);
     }
   }, [isExpanded]);
 
