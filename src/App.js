@@ -100,6 +100,7 @@ function App() {
   const [isClicked, setIsClicked] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
   const [showCards, setShowCards] = useState(false);
+  const [shouldShowCards, setShouldShowCards] = useState(false);
   const [pokemons, setPokemons] = useState([]);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -115,16 +116,19 @@ function App() {
     (async () => {
       const pokemonsData = await fetchPokemonsData();
       setPokemons(pokemonsData);
-      // Mostrar las tarjetas solo cuando los datos estén listos
-      setShowCards(true);
     })();
   }, []);
+
+  useEffect(() => {
+    if (isExpanded) {
+      setShouldShowCards(true);
+    }
+  }, [isExpanded]);
 
   const handleImageClick = () => {
     if (!isClicked) {
       setIsClicked(true);
       setIsExpanded(true);
-      setTimeout(() => setShowCards(true), 0.1);
     }
   };
 
