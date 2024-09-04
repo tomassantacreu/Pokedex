@@ -115,6 +115,8 @@ function App() {
     (async () => {
       const pokemonsData = await fetchPokemonsData();
       setPokemons(pokemonsData);
+      // Mostrar las tarjetas solo cuando los datos estén listos
+      setShowCards(true);
     })();
   }, []);
 
@@ -122,7 +124,7 @@ function App() {
     if (!isClicked) {
       setIsClicked(true);
       setIsExpanded(true);
-      setTimeout(() => setShowCards(true), 0);
+      setTimeout(() => setShowCards(true), 0.1);
     }
   };
 
