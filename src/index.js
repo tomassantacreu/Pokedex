@@ -1,7 +1,7 @@
 // src/index.js
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App"; // Importa el componente App
+import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>

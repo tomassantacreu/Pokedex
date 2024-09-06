@@ -20,19 +20,7 @@
   overflow: hidden;
 }
 
-.top {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  justify-content: flex-start;
-  z-index: 3;
-}
-
-.top,
-.top img {
-  width: 100vw;
-}
+/*Middle*/
 
 .middle {
   display: flex;
@@ -46,10 +34,13 @@
   z-index: 1;
 }
 .middle.expanded {
-  height: 230vh; /* altura cuando se expande */
+  height: 230vh;
   padding: 2px;
   z-index: 1;
 }
+
+/*Cards Container*/
+
 .cards-container {
   display: flex;
   flex-direction: row;
@@ -58,10 +49,19 @@
   height: 150%;
   gap: 10px;
   justify-content: center;
-  flex-wrap: wrap; /* Permite que las cards se ajusten en varias filas */
-  overflow-y: scroll; /* Habilita el desplazamiento vertical si es necesario */ /* Espaciado interno */
+  flex-wrap: wrap;
+  overflow-y: scroll;
   padding: 50vh 0px;
 }
+
+.loading-indicator {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Top y Bottom*/
 
 .top2,
 .bottom2 {
@@ -75,8 +75,21 @@
 .spacer-top,
 .spacer-bottom {
   flex: 1; /* Ocupa el espacio disponible entre los elementos */
-  background-color: rgb(190, 16, 35); /* Color del espacio */
-  height: 100%; /* Ajusta la altura según sea necesario */
+  background-color: rgb(190, 16, 35);
+  height: 100%;
+}
+.top {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: flex-start;
+  z-index: 3;
+}
+
+.top,
+.top img {
+  width: 100vw;
 }
 .bottom {
   width: 100vw;

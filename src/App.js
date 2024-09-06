@@ -1,10 +1,9 @@
-// src/App.js
 import React, { useState, useEffect, Suspense, lazy } from "react";
 import { Modal } from "./components/Modal/Modal";
 import { Pokeball } from "./components/Pokeball/Pokeball";
-
-import "./App.css"; // Asegúrate de tener tus estilos aquí
+import "./App.css";
 import "./assets/styles/fonts.css";
+import { OrbitProgress } from "react-loading-indicators";
 const PokemonCard = lazy(() =>
   import("./components/PokemonCard/PokemonCard").then((module) => ({
     default: module.PokemonCard,
@@ -45,9 +44,6 @@ const TYPE_SPRITES = {
   normal:
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/types/generation-vi/x-y/1.png",
 };
-
-// Helper functions
-const formatPokemonId = (id) => id.toString().padStart(3, "0");
 
 const fetchPokemonsData = async () => {
   try {
@@ -155,7 +151,19 @@ function App() {
       >
         {showCards && (
           <div className="cards-container">
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense
+              fallback={
+                <div className="loading-indicator">
+                  <OrbitProgress
+                    variant="split-disc"
+                    color="#44dbff"
+                    size="medium"
+                    text=""
+                    textColor=""
+                  />
+                </div>
+              }
+            >
               {pokemons.map((pokemon) => (
                 <PokemonCard
                   key={pokemon.id}
