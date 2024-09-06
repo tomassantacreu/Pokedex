@@ -24,7 +24,7 @@
   overflow: hidden;
 }
 .modal-bg {
-  background: url("../../public/bg.png");
+  background: url("../../assets/images/bg.png");
   animation: moveBackground 50s linear infinite;
   position: absolute;
   background-size: 30%;

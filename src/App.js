@@ -1,12 +1,12 @@
 // src/App.js
 import React, { useState, useEffect, Suspense, lazy } from "react";
-import { Modal } from "./components/Modal";
-import { Pokeball } from "./components/Pokeball";
+import { Modal } from "./components/Modal/Modal";
+import { Pokeball } from "./components/Pokeball/Pokeball";
 
 import "./App.css"; // Asegúrate de tener tus estilos aquí
-import "./fonts.css";
+import "./assets/styles/fonts.css";
 const PokemonCard = lazy(() =>
-  import("./components/PokemonCard").then((module) => ({
+  import("./components/PokemonCard/PokemonCard").then((module) => ({
     default: module.PokemonCard,
   }))
 );

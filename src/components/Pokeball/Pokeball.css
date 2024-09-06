@@ -18,7 +18,7 @@
   border-radius: 50%;
   animation: pokeballimg 1.3s infinite;
   animation-delay: 250ms;
-  background-image: url(../../public/pokeball.png);
+  background-image: url(../../../public/pokeball.png);
   background-size: cover;
   box-shadow: inset 0 0 20px rgb(0, 38, 255);
   opacity: 0.5;
